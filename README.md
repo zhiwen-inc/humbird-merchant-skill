@@ -1,6 +1,7 @@
-# merchant-skill
+# humbird-merchant-skill
 
-## 简介
+## 蜂鸟POD助手
+
 
 基于厦门指纹科技(HICUSTOM)的蜂鸟数智平台的公共API接口封装的SKILL，针对POD(Print On Demand)市场提供商品查询,商品详情，图库管理、图片上传、下载，批量创建定制商品等能力
 

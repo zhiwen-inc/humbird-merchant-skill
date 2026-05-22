@@ -1,10 +1,10 @@
 ---
 name: humbird-merchant-skill
-display_name: "humbird-merchant-skill - POD: Product Selection, Image Library & Batch Design Products"
+display_name: "Humbird POD assistant - Product Selection, Image Library & Batch Design Products"
 version: 1.0.0
 author: hicustom.com
 description: 基于厦门指纹科技(HICUSTOM)的蜂鸟数智平台的公共API接口封装的SKILL，提供商品查询,商品详情，图库管理,图片上传、下载，创建定制商品等能力
-homepage: https://www.hicustom.com/?utm_source=AgentSKILL&utm_medium=default&utm_campaign=default&utm_term=default&utm_content=
+homepage: https://www.hicustom.com/?utm_source=AgentSKILL&utm_medium=arkclaw&utm_campaign=arkclaw&utm_term=arkclaw&utm_content=
 capabilities: ["POD (Print On Demain) Design"]
 metadata:
   {
@@ -16,10 +16,9 @@ metadata:
   }
 ---
 
-# humbird-merchant-skill - POD: Product Selection, Image Library & Batch Design Products
+# 蜂鸟POD助手 - POD: Product Selection, Image Library & Batch Design Products
 
 本技能通过厦门指纹科技(HICUSTOM)的蜂鸟数智平台的公共API接口来进行选品、图库管理、定制商品等操作。
-
 
 
 ## 前提
@@ -31,7 +30,7 @@ metadata:
    - 点击右上角的用户名 → 账号管理 → API Keys 
 
 2. 还没有账号的
-   - 请到 [HICUSTOM](https://www.hicustom.com/?utm_source=AgentSKILL&utm_medium=default&utm_campaign=default&utm_term=default&utm_content=) 进行注册或登录
+   - 请到 [HICUSTOM](https://www.hicustom.com/?utm_source=AgentSKILL&utm_medium=arkclaw&utm_campaign=arkclaw&utm_term=arkclaw&utm_content=) 进行注册或登录
    - 登录后，点击顶部导航切换全球发货中心，然后点击右上角的用户名 → 账号管理 → API Keys
 
 3. 创建一个新的API Key，并按您所使用的AI Agent的要求设置 API Key
