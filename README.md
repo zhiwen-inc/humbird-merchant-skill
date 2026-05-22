@@ -5,6 +5,18 @@
 基于厦门指纹科技(HICUSTOM)的蜂鸟数智平台的公共API接口封装的SKILL，针对POD(Print On Demand)市场提供商品查询,商品详情，图库管理、图片上传、下载，批量创建定制商品等能力
 
 
+## 如何获取API Key
+
+1. 已经有蜂鸟数智平台商户账号
+   - 登入账号，进入控制台
+   - 点击右上角的用户名 → 账号管理 → API Keys
+
+2. 还没有账号的
+   - 请到 [HICUSTOM](https://www.hicustom.com/?utm_source=AgentSKILL&utm_medium=default&utm_campaign=default&utm_term=default&utm_content=) 进行注册或登录
+   - 登录后，点击顶部导航切换全球发货中心，然后点击右上角的用户名 → 账号管理 → API Keys
+
+3. 创建一个新的API Key，并按您所使用的AI Agent的要求设置 API Key
+
 
 ## 安装依赖
 
@@ -45,3 +57,11 @@ humbird_api.py参数说明
 - 创建批量设计：调用接口创建批量设计，返回批量设计Id。后续可通过该Id查询批量设计信息。
 - 查询批量设计：根据批量设计id查询批量设计信息。
 
+
+### 典型使用路径
+
+- 通过大模型生成热卖素材图片
+- 搜索平台商品，了解商品详细信息
+- 上传图片到图库
+- 使用上传的图片，批量设计定制商品
+- 到控制台查看定制商品，批量刊登到销售平台店铺
