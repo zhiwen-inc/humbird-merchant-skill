@@ -4,16 +4,20 @@ display_name: "Humbird POD assistant - Product Selection, Image Library & Batch 
 version: 1.0.0
 author: hicustom.com
 description: 基于厦门指纹科技(HICUSTOM)的蜂鸟数智平台的公共API接口封装的SKILL，提供商品查询,商品详情，图库管理,图片上传、下载，创建定制商品等能力
-homepage: https://www.hicustom.com/?utm_source=AgentSKILL&utm_medium=arkclaw&utm_campaign=arkclaw&utm_term=arkclaw&utm_content=
+homepage: https://www.hicustom.com/?utm_source=AgentSKILL&utm_medium=default&utm_campaign=default&utm_term=default&utm_content=
 capabilities: ["POD (Print On Demain) Design"]
+keywords:
+  - 蜂鸟
+  - 选品
+  - 定制
+  - humbird
 metadata:
-  {
-    "openclaw":
-      {
-        "requires": { "env": ["HUMBIRD_API_KEY"] },
-        "primaryEnv": "HUMBIRD_API_KEY",
-      },
-  }
+  version: 0.8.0
+  openclaw:
+    primaryEnv: HUMBIRD_API_KEY
+    requiredMcp:
+      - humbird-mcp-server
+    requiresNetwork: true
 ---
 
 # 蜂鸟POD助手 - POD: Product Selection, Image Library & Batch Design Products
@@ -21,7 +25,7 @@ metadata:
 本技能通过厦门指纹科技(HICUSTOM)的蜂鸟数智平台的公共API接口来进行选品、图库管理、定制商品等操作。
 
 
-## 前提
+## 前置条件
 
 ### 如何获取API Key
 
@@ -30,10 +34,39 @@ metadata:
    - 点击右上角的用户名 → 账号管理 → API Keys 
 
 2. 还没有账号的
-   - 请到 [HICUSTOM](https://www.hicustom.com/?utm_source=AgentSKILL&utm_medium=arkclaw&utm_campaign=arkclaw&utm_term=arkclaw&utm_content=) 进行注册或登录
+   - 请到 [HICUSTOM](https://www.hicustom.com/?utm_source=AgentSKILL&utm_medium=default&utm_campaign=default&utm_term=default&utm_content=) 进行注册或登录
    - 登录后，点击顶部导航切换全球发货中心，然后点击右上角的用户名 → 账号管理 → API Keys
 
 3. 创建一个新的API Key，并按您所使用的AI Agent的要求设置 API Key
+
+
+
+### 安装MCP Server
+
+**必需 MCP Server**: `humbird-mcp-server`
+
+优先使用名为 `humbird-mcp-server` 的 MCP server。
+
+**MCP 配置**:
+
+```json
+{
+  "mcpServers": {
+    "humbird-mcp-server": {
+      "transport": "streamable-http",
+      "url": "https://mcp-server.hihumbird.com/mcp",
+      "headers": {
+        "x-api-key": "${HUMBIRD_API_KEY}"
+      }
+    }
+  }
+}
+```
+
+**安全说明**:
+
+- `HUMBIRD_API_KEY` 读取优先级：环境变量 `HUMBIRD_API_KEY` > 当前对话用户明确提供的 token > 本地文件 `~/.my-coffee/HUMBIRD_API_KEY`（仅在用户明确同意记录后可使用）。
+
 
 
 ## 脚本执行例示
@@ -48,6 +81,27 @@ humbird_api.py参数说明
 | ---- | -------- | ------------------------------------------------------------ |
 | -m   | --method | 请求方式，值为[POST、GET]，例：POST                          |
 | -p   | --params | 请求参数，json格式，例：<br />'{<br/>	"api_type": "spu.selection.spu.list.query",<br/>	"page": 1,<br/>	"page_size": 20<br/>}' |
+
+
+
+## References
+
+详细API文档存在**`references/`**里（一个文件一个API）：
+
+| 类型     | Doc                                    |
+| -------- | -------------------------------------- |
+| 图片上传 | `references/gallery_picture_upload.md` |
+
+
+
+
+
+## 执行优先级
+
+以下为强约束，优先级高于其余章节；如有重复描述，以本节为准：
+
+1. **能力约束**：mcp tool有的能力优先使用（除了图片上传外），只有在mcp tool调用失败后，才使用`humbird_api.py`
+2. **脚本约束**：不可自己生成脚本，只能使用`humbird_api.py`
 
 
 
@@ -73,29 +127,20 @@ humbird_api.py参数说明
 
 
 
-## References
+## 典型使用路径
 
-详细API文档存在**`references/`**里（一个文件一个API）：
-
-| 类型         | Doc                                      |
-| ------------ | ---------------------------------------- |
-| 商品类目     | `references/spu_category.md`             |
-| 商品列表     | `references/spu_list.md`                 |
-| 商品详情     | `references/spu_get.md`                  |
-| 图片列表     | `references/gallery_picture_search.md`   |
-| 图片详情     | `references/gallery_picture_detail.md`   |
-| 图片上传     | `references/gallery_picture_upload.md`   |
-| 原图下载     | `references/gallery_picture_download.md` |
-| 创建批量设计 | `references/batch_design_create.md`      |
-| 查询批量设计 | `references/batch_design_get.md`         |
+- 通过大模型生成热卖素材图片
+- 搜索平台商品，了解商品详细信息
+- 上传图片到图库
+- 使用上传的图片，批量设计定制商品
+- 到控制台 `创作`→`创作管理`→`定制商品` 查看定制商品
+- 批量刊登到销售平台店铺
 
 
 
-## 注意
+## 友好的展示要求
 
-- 如果返回的数据带有图片链接，则必须使用markdown格式展示出来
-- 数据有id字段优先展示出来
-
-
-
+- **通用原则**：输出内容必须为有效的 `markdown` 格式，并采用富文本 + 图片的呈现方式。
+- **图片展示**：输出 `![{picTitle}]({picUrl})`，其中 `{picTitle}` 和 `{picUrl}` 来自返回数据，若picTitle则取名称。
+- **id展示**：数据有id字段优先展示出来
 
