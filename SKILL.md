@@ -3,7 +3,7 @@ name: humbird-merchant-skill
 display_name: "Humbird POD assistant - Product Selection, Image Library & Batch Design Products"
 version: 1.0.0
 author: hicustom.com
-description: 基于厦门指纹科技(HICUSTOM)的蜂鸟数智平台的公共API接口封装的SKILL，提供商品查询,商品详情，图库管理,图片上传、下载，创建定制商品等能力
+description: 基于厦门指纹科技(HICUSTOM)的蜂鸟数智平台(wwww.hihumbird.com)的公共API接口封装的SKILL，提供商品查询,商品详情，图库管理,图片上传、下载，创建定制商品等能力
 homepage: https://www.hicustom.com/?utm_source=AgentSKILL&utm_medium=default&utm_campaign=default&utm_term=default&utm_content=
 capabilities: ["POD (Print On Demain) Design"]
 keywords:
@@ -48,6 +48,7 @@ metadata:
 优先使用名为 `humbird-mcp-server` 的 MCP server。
 
 **MCP 配置**:
+以下的MCP Server的声明，需要根据不同的 AI Agent的要求进行配置，读取HUMBIRD_API_KEY，发起MCP请求
 
 ```json
 {
@@ -65,7 +66,7 @@ metadata:
 
 **安全说明**:
 
-- `HUMBIRD_API_KEY` 读取优先级：环境变量 `HUMBIRD_API_KEY` > 当前对话用户明确提供的 token > 本地文件 `~/.my-coffee/HUMBIRD_API_KEY`（仅在用户明确同意记录后可使用）。
+- `HUMBIRD_API_KEY` MCP Client通常应该读取环境变量 `HUMBIRD_API_KEY`, 如果无法正确读取，请查询所使用的Agent的读取规则进行设置
 
 
 
@@ -80,7 +81,7 @@ humbird_api.py参数说明
 | 参数 | 完整参数 | 说明                                                         |
 | ---- | -------- | ------------------------------------------------------------ |
 | -m   | --method | 请求方式，值为[POST、GET]，例：POST                          |
-| -p   | --params | 请求参数，json格式，例：<br />'{<br/>	"api_type": "spu.selection.spu.list.query",<br/>	"page": 1,<br/>	"page_size": 20<br/>}' |
+| -p   | --params | 请求参数，json格式，例：<br />'{<br/>	"api_type": "gallery.picture.upload",<br/>	"gallery_id": 660,<br/>	"category_id": 20<br/>}' |
 
 
 

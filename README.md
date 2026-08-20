@@ -36,7 +36,7 @@ humbird_api.py参数说明
 | 参数 | 完整参数 | 说明                                                         |
 | ---- | -------- | ------------------------------------------------------------ |
 | -m   | --method | 请求方式，值为[POST、GET]，例：POST                          |
-| -p   | --params | 请求参数，json格式，例：<br />'{<br/>	"api_type": "spu.selection.spu.list.query",<br/>	"page": 1,<br/>	"page_size": 20<br/>}' |
+| -p   | --params | 请求参数，json格式，例：<br />'{<br/>       "api_type": "gallery.picture.upload",<br/>      "gallery_id": 660,<br/> "category_id": 20<br/>}' |
 
 ## 核心能力
 
