@@ -29,15 +29,25 @@ metadata:
 
 ### 如何获取API Key
 
-1. 已经有蜂鸟数智平台商户账号
-   - 登入账号，进入控制台
-   - 点击右上角的用户名 → 账号管理 → API Keys 
-
-2. 还没有账号的
+1. 还没有蜂鸟数智平台商户账号
    - 请到 [HICUSTOM](https://www.hicustom.com/?utm_source=AgentSKILL&utm_medium=default&utm_campaign=default&utm_term=default&utm_content=) 进行注册或登录
    - 登录后，点击顶部导航切换全球发货中心，然后点击右上角的用户名 → 账号管理 → API Keys
 
+2. 已经有蜂鸟数智平台商户账号
+   - 进入自己的商户登入网址(可能与上述网址不同）
+   - 登入，进入控制台
+   - 点击右上角的用户名 → 账号管理 → API Keys 
+
 3. 创建一个新的API Key，并按您所使用的AI Agent的要求设置 API Key
+
+
+### 设置API Key
+
+MCP Server和script下的脚本都需要使用Key,在执行操作前，先确保设置环境变量   
+```
+HUMBIRD_API_KEY=your_api_key_here
+```
+没有正确设置环境变量的，引导用户提供`HUMBIRD_API_KEY`，并设置到环境变量中持久化
 
 
 
@@ -101,9 +111,10 @@ humbird_api.py参数说明
 
 以下为强约束，优先级高于其余章节；如有重复描述，以本节为准：
 
-1. **能力约束**：mcp tool有的能力优先使用（除了图片上传外），只有在mcp tool调用失败后，才使用`humbird_api.py`
-2. **脚本约束**：不可自己生成脚本，只能使用`humbird_api.py`
-
+1. **脚本约束**：图片上传使用，`humbird_api.py`, 不可生成其它脚本使用
+2. **能力约束**：除了图片上传外，其它能力都通过调用MCP Tool来实现
+3. MCP Server未连接的，在`HUMBIRD_API_KEY`已经设置的情况下，自动或者引导用户在Agent中创建上述的MCP Server,未设置`HUMBIRD_API_KEY`的，先引导用户设置`HUMBIRD_API_KEY`
+4. 在确定MCP Client运行时支持读取环境变量的情况下，在自动创建MCP Server时，优先保持环境变量引用，不要填写实际的KEY;不能确定的，一律写入实际的`HUMBIRD_API_KEY`
 
 
 ## 核心能力
