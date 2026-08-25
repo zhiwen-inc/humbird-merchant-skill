@@ -115,6 +115,7 @@ humbird_api.py参数说明
 2. **能力约束**：除了图片上传外，其它能力都通过调用MCP Tool来实现
 3. MCP Server未连接的，在`HUMBIRD_API_KEY`已经设置的情况下，自动或者引导用户在Agent中创建上述的MCP Server,未设置`HUMBIRD_API_KEY`的，先引导用户设置`HUMBIRD_API_KEY`
 4. 在确定MCP Client运行时支持读取环境变量的情况下，在自动创建MCP Server时，优先保持环境变量引用，不要填写实际的KEY;不能确定的，一律写入实际的`HUMBIRD_API_KEY`
+5. 在 Codex 中创建或修复 humbird-mcp-server 时，必须使用 env_http_headers: {"x-api-key": "HUMBIRD_API_KEY"}；禁止使用 http_headers/headers 或把真实 Key 明文写入配置。
 
 
 ## 核心能力
