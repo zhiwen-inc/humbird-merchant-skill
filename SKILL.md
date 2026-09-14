@@ -1,9 +1,9 @@
 ---
-name: humbird-merchant-skill
+name: 蜂鸟POD助手
 display_name: "Humbird POD assistant - Product Selection, Image Library & Batch Design Products"
-version: 1.0.0
+version: 1.0.2
 author: hicustom.com
-description: 基于厦门指纹科技(HICUSTOM)的蜂鸟数智平台(wwww.hihumbird.com)的公共API接口封装的SKILL，提供商品查询,商品详情，图库管理,图片上传、下载，创建定制商品等能力
+description: 基于厦门指纹科技(HICUSTOM)的蜂鸟数智平台(wwww.hihumbird.com)的公共API接口封装的SKILL，提供商品查询，商品详情，图库管理，图片上传、下载，创建定制商品等能力
 homepage: https://www.hicustom.com/?utm_source=AgentSKILL&utm_medium=default&utm_campaign=default&utm_term=default&utm_content=
 capabilities: ["POD (Print On Demain) Design"]
 keywords:
@@ -12,7 +12,7 @@ keywords:
   - 定制
   - humbird
 metadata:
-  version: 0.8.0
+  version: 1.0.2
   openclaw:
     primaryEnv: HUMBIRD_API_KEY
     requiredMcp:
@@ -24,41 +24,15 @@ metadata:
 
 本技能通过厦门指纹科技(HICUSTOM)的蜂鸟数智平台的公共API接口来进行选品、图库管理、定制商品等操作。
 
-
 ## 前置条件
-
-### 如何获取API Key
-
-1. 还没有蜂鸟数智平台商户账号
-   - 请到 [HICUSTOM](https://www.hicustom.com/?utm_source=AgentSKILL&utm_medium=default&utm_campaign=default&utm_term=default&utm_content=) 进行注册或登录
-   - 登录后，点击顶部导航切换全球发货中心，然后点击右上角的用户名 → 账号管理 → API Keys
-
-2. 已经有蜂鸟数智平台商户账号
-   - 进入自己的商户登入网址(可能与上述网址不同）
-   - 登入，进入控制台
-   - 点击右上角的用户名 → 账号管理 → API Keys 
-
-3. 创建一个新的API Key，并按您所使用的AI Agent的要求设置 API Key
-
-
-### 设置API Key
-
-MCP Server和script下的脚本都需要使用Key,在执行操作前，先确保设置环境变量   
-```
-HUMBIRD_API_KEY=your_api_key_here
-```
-没有正确设置环境变量的，引导用户提供`HUMBIRD_API_KEY`，并设置到环境变量中持久化
-
-
 
 ### 安装MCP Server
 
-**必需 MCP Server**: `humbird-mcp-server`
+**必需确保安装了MCP Server**: `humbird-mcp-server`
 
-优先使用名为 `humbird-mcp-server` 的 MCP server。
+**MCP 配置**
 
-**MCP 配置**:
-以下的MCP Server的声明，需要根据不同的 AI Agent的要求进行配置，读取HUMBIRD_API_KEY，发起MCP请求
+以下的MCP Server的声明，需要根据不同的 AI Agent的要求进行配置，发起MCP请求
 
 ```json
 {
@@ -74,36 +48,18 @@ HUMBIRD_API_KEY=your_api_key_here
 }
 ```
 
-**安全说明**:
+#### 如何获取API Key
 
-- `HUMBIRD_API_KEY` MCP Client通常应该读取环境变量 `HUMBIRD_API_KEY`, 如果无法正确读取，请查询所使用的Agent的读取规则进行设置
+1. 还没有蜂鸟数智平台商户账号
+   - 请到 [HICUSTOM](https://www.hicustom.com/?utm_source=AgentSKILL&utm_medium=default&utm_campaign=default&utm_term=default&utm_content=) 进行注册或登录
+   - 登录后，点击顶部导航切换全球发货中心，然后点击右上角的用户名 → 账号管理 → API Keys
 
+2. 已经有蜂鸟数智平台商户账号
+   - 进入自己的商户登入网址(可能与上述网址不同）
+   - 登入，进入控制台
+   - 点击右上角的用户名 → 账号管理 → API Keys 
 
-
-## 脚本执行例示
-
-```bash
-python3 {baseDir}/scripts/humbird_api.py -m POST -p '{"api_type": "xxx"}'
-```
-
-humbird_api.py参数说明
-
-| 参数 | 完整参数 | 说明                                                         |
-| ---- | -------- | ------------------------------------------------------------ |
-| -m   | --method | 请求方式，值为[POST、GET]，例：POST                          |
-| -p   | --params | 请求参数，json格式，例：<br />'{<br/>	"api_type": "gallery.picture.upload",<br/>	"gallery_id": 660,<br/>	"category_id": 20<br/>}' |
-
-
-
-## References
-
-详细API文档存在**`references/`**里（一个文件一个API）：
-
-| 类型     | Doc                                    |
-| -------- | -------------------------------------- |
-| 图片上传 | `references/gallery_picture_upload.md` |
-
-
+3. 创建一个新的API Key，并按您所使用的AI Agent的要求设置 API Key
 
 
 
@@ -111,10 +67,11 @@ humbird_api.py参数说明
 
 以下为强约束，优先级高于其余章节；如有重复描述，以本节为准：
 
-1. **脚本约束**：图片上传使用，`humbird_api.py`, 不可生成其它脚本使用
-2. **能力约束**：除了图片上传外，其它能力都通过调用MCP Tool来实现
-3. MCP Server未连接的，在`HUMBIRD_API_KEY`已经设置的情况下，自动或者引导用户在Agent中创建上述的MCP Server,未设置`HUMBIRD_API_KEY`的，先引导用户设置`HUMBIRD_API_KEY`
-4. 在确定MCP Client运行时支持读取环境变量的情况下，在自动创建MCP Server时，优先保持环境变量引用，不要填写实际的KEY;不能确定的，一律写入实际的`HUMBIRD_API_KEY`
+1. **脚本约束**：只有图片上传使用`humbird_api.py`, 不可生成其它脚本使用
+2. **能力约束**：除了图片上传外，其它能力都通过调用humbird-mcp-server来实现
+3. MCP Server未连接的，自动或者引导用户在Agent中创建上述的MCP Server连接器
+4. 在确定MCP Client运行时支持读取环境变量的情况下，在自动创建MCP Server时，优先保持环境变量引用，不要填写实际的KEY；不能确定的，一律写入实际的`HUMBIRD_API_KEY`
+4. SKILL中调用 humbird_api.py 需要传入API Key，一律通过MCP Server的get_api_key获取
 5. 在 Codex 中创建或修复 humbird-mcp-server 时，必须使用 env_http_headers: {"x-api-key": "HUMBIRD_API_KEY"}；禁止使用 http_headers/headers 或把真实 Key 明文写入配置。
 
 
@@ -140,6 +97,24 @@ humbird_api.py参数说明
 
 
 
+## 图片上传功能
+
+图片上传不需要调用MCP Server，只需要执行humbird_api.py脚本，脚本请求样例：
+
+```bash
+python3 {baseDir}/scripts/humbird_api.py -m {method} -p {params} -k {api_key}
+```
+
+humbird_api.py参数说明
+
+| 参数 | 完整参数  | 说明                                                         |
+| ---- | --------- | ------------------------------------------------------------ |
+| -m   | --method  | 请求方式，值为[POST、GET]，例：POST                          |
+| -p   | --params  | 请求参数，json格式，例：<br />'{<br/>	"api_type": "gallery.picture.upload",<br/>	"gallery_id": 660,<br/>	"category_id": 20<br/>}'<br />更详细的参数务必参考`references/gallery_picture_upload.md`文档 |
+| -k   | --api-key | 从humbird-mcp-server的get_api_key工具中获取                     |
+
+
+
 ## 典型使用路径
 
 - 通过大模型生成热卖素材图片
@@ -154,6 +129,6 @@ humbird_api.py参数说明
 ## 友好的展示要求
 
 - **通用原则**：输出内容必须为有效的 `markdown` 格式，并采用富文本 + 图片的呈现方式。
-- **图片展示**：输出 `![{picTitle}]({picUrl})`，其中 `{picTitle}` 和 `{picUrl}` 来自返回数据，若picTitle则取名称。
-- **id展示**：数据有id字段优先展示出来
+- **图片展示**：输出 `![{picTitle}]({picUrl})`，其中 `{picTitle}` 和 `{picUrl}` 来自返回数据，若picTitle则取名称。若数据是以表格形式展示，图片放进表格里一起展示，不要单独展示
+- **ID展示**：数据有id字段优先展示出来
 

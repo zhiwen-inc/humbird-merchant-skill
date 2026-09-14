@@ -88,7 +88,7 @@ python3 {baseDir}/scripts/humbird_api.py -m POST -p '{
       "description": "风景,自然"
     }
   ]
-}'
+}' -k {api_key}
 ```
 
 

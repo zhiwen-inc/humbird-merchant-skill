@@ -1,9 +1,10 @@
-# humbird-merchant-skill
+# Humbird Pod Assistant Skill
 
 ## 蜂鸟POD助手
 
 
 基于蜂鸟数智(www.hihumbird.com)平台的公共API接口封装的SKILL，针对POD(Print On Demand)市场提供商品查询,商品详情，图库管理、图片上传、下载，批量创建定制商品等能力
+
 
 
 ## 如何获取API Key
@@ -19,24 +20,6 @@
 3. 创建一个新的API Key，并按您所使用的AI Agent的要求设置 API Key
 
 
-## 安装依赖
-
-```bash
-pip install -r requirements.txt
-```
-
-## 使用方法
-
-```bash
-python3 {baseDir}/scripts/humbird_api.py -m POST -p '{"api_type": "xxx"}'
-```
-
-humbird_api.py参数说明
-
-| 参数 | 完整参数 | 说明                                                         |
-| ---- | -------- | ------------------------------------------------------------ |
-| -m   | --method | 请求方式，值为[POST、GET]，例：POST                          |
-| -p   | --params | 请求参数，json格式，例：<br />'{<br/>       "api_type": "gallery.picture.upload",<br/>      "gallery_id": 660,<br/> "category_id": 20<br/>}' |
 
 ## 核心能力
 

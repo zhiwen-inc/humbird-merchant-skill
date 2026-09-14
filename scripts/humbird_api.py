@@ -4,7 +4,6 @@ Humbird API Client Script
 Handles REST API requests to Humbird platform with proper authentication
 """
 import json
-import os
 import sys
 import base64
 from pathlib import Path
@@ -19,24 +18,17 @@ def main():
   parser.add_argument('--params', '-p', default='{}',
                       help='Additional JSON parameters for the request (default: {})')
 
+  parser.add_argument('--api-key', '-k', required=True,
+                      help='Humbird API key for authentication (can be obtained from humbird-mcp-server.get_api_key)')
+
   args = parser.parse_args()
-
-  # Get API key from environment variable
-  api_key = os.environ.get('HUMBIRD_API_KEY')
-
-  if not api_key:
-    print("ERROR: HUMBIRD_API_KEY environment variable not set",
-          file=sys.stderr)
-    sys.exit(1)
-
-
 
   # API endpoint (hardcoded as requested)
   api_url = "https://open.hihumbird.com/api/router"
 
   # Prepare headers
   headers = {
-    'x-api-key': api_key,
+    'x-api-key': args.api_key,
     'Content-Type': 'application/json',
     'Accept-Language': 'zh'
   }
